@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>OnionTestFrame</groupId>
+	<artifactId>OnionTestFramework</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>OnionTestFramework</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.release>17</maven.compiler.release>
+		<selenium.version>4.34.0</selenium.version>
+		<webdrivermanager.version>6.2.0</webdrivermanager.version>
+		<extentreports-cucumber7-adapter.version>1.14.0</extentreports-cucumber7-adapter.version>
+		<cucumber-java.version>7.27.0</cucumber-java.version>
+		<maven.complier.version>3.14.0</maven.complier.version>
+		<maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+		<java-version>17</java-version>
+		<maven-failsafe-plugin.version>3.5.3</maven-failsafe-plugin.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>5.11.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>${webdrivermanager.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>tech.grasshopper</groupId>
+			<artifactId>extentreports-cucumber7-adapter</artifactId>
+			<version>${extentreports-cucumber7-adapter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber-java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>${cucumber-java.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven
+			defaults (may be moved to parent pom) -->
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.complier.version}</version> <!-- Use latest
+					stable version -->
+					<configuration>
+						<source>${java-version}</source> <!-- Your Java version -->
+						<target>${java-version}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<parallel>methods</parallel>
+						<threadCount>10</threadCount>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven-failsafe-plugin.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>integration-test</goal>
+							</goals>
+							<configuration>
+								<excludes>
+									<exclude>**/*IT*.java</exclude>
+								</excludes>
+								<includes>
+									<include>**//TestRunner.java</include>
+								</includes>
+								<parallel>methods</parallel>
+								<threadCount>
+									4
+								</threadCount>
+								<perCoreThreadCount>
+									true
+								</perCoreThreadCount>
+								<forkCount>2</forkCount>
+								<reuseForks>
+									true</reuseForks>
+								<reportsDirectory>
+									${project.build.directory}/failsafe-reports_${surefire.forkNumber}</reportsDirectory>
+							</configuration>
+						</execution>
+					</executions>
+					<configuration>
+						<parallel>methods</parallel>
+						<threadCount>10</threadCount>
+					</configuration>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
+	</build>
+</project>
