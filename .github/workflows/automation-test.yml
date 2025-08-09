@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: windows-latest
     env:
-        BASE_URL="https://dev.onion.gnapitech.org"
-        BROWSER=${{ secrets.BROWSER }}
+        BASE_URL: https://dev.onion.gnapitech.org
+        BROWSER: ${{ secrets.BROWSER }}
         
     steps:
       - uses: actions/checkout@v4
@@ -25,4 +25,4 @@ jobs:
 
       - name: Build with Maven (headless)
         working-directory: OnionTestFramework
-        run: mvn verify -Dheadless=true
+        run: mvn verify -Dheadless=true -DBASE_URL="${{ env.BASE_URL }}" -DBROWSER="${{ env.BROWSER }}"
