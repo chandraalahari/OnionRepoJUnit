@@ -18,7 +18,7 @@ public class LoginTest {
 	@Given("user opens the onion url on the browser")
 	public void user_open_the_onion_url_on_the_browser() {
 
-		DriverFactory.getDriver().get("https://dev.onion.gnapitech.org");
+		DriverFactory.getDriver().get(System.getenv("BASE_URL"));
 	}
 
 	@When("user is able to read the title")

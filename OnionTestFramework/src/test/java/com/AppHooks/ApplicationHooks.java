@@ -29,6 +29,7 @@ public class ApplicationHooks {
 	public void init_browser() {
 		//String browser = prop.getProperty("browser"); //From Config.properties
 		String browser = System.getenv("BROWSER");
+		System.out.println("Browser passed - " + browser);
 		factory = new DriverFactory();
 		driver = factory.init_driver(browser);
 	}
