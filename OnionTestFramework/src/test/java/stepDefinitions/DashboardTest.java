@@ -22,7 +22,7 @@ public class DashboardTest {
 		List<Map<String, String>> creds = dataTable.asMaps();
 		String username = creds.get(0).get("username");
 		String password = creds.get(0).get("password");
-		DriverFactory.getDriver().get("https://dev.onion.gnapitech.org");
+		DriverFactory.getDriver().get(System.getenv("BASE_URL"));
 		dashboardPage = loginPage.loginIntoTheTool(username, password);
 	}
 

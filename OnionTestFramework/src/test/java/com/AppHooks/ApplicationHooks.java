@@ -6,7 +6,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-import com.aventstack.extentreports.gherkin.model.Scenario;
 import com.qa.factory.ConfigReader;
 import com.qa.factory.DriverFactory;
 
@@ -28,7 +27,8 @@ public class ApplicationHooks {
 
 	@Before(order = 1)
 	public void init_browser() {
-		String browser = prop.getProperty("browser");
+		//String browser = prop.getProperty("browser"); //From Config.properties
+		String browser = System.getenv("BROWSER");
 		factory = new DriverFactory();
 		driver = factory.init_driver(browser);
 	}
